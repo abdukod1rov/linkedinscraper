@@ -10,7 +10,8 @@ This project requires Python 3.11 and the following packages:
 - BeautifulSoup4
 - requests
 - json
-You can install these packages using pip by running the following command:
+
+ You can install these packages using pip by running the following command:
 `pip install -r requirements.txt`
 
 # Running the Scraper
