@@ -7,9 +7,9 @@ The scraper extracts information such as the job title, company, location, job l
 ## Requirements
 This project requires Python 3.11 and the following packages:
 
--BeautifulSoup4
-*requests
-+json
+- BeautifulSoup4
+- requests
+- json
 You can install these packages using pip by running the following command:
 `pip install -r requirements.txt`
 
@@ -21,7 +21,8 @@ The scraper will fetch the job listings from LinkedIn and save the data to a JSO
 
 
 ## Modifying the Scraper
-If you want to modify the scraper to extract additional data or use a different website, you can edit the scraper.py file. 
+There is already a valid Linkedin URL that fetches Python developer jobs. If you want to directly see the job_listing.json, I provided in the directory.
+And also, if you want to modify the scraper to extract additional data or use a different website, you can edit the main.py file. 
 The file is well-commented and should be easy to follow.
 
 ## Conclusion
