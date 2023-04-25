@@ -8,17 +8,21 @@ hrefs = []
 try:
     response = requests.get(base_url)
     soup2 = BeautifulSoup(response.text, 'html.parser')
-    job_listings = soup2.find_all('li')
+    listings = soup2.find_all('li')
 
     jobs = []
     job_links = []
-    for job in job_listings:
+    for job in listings:
+        # find all the <a hrefs>
         a = job.find('a')
         if a:
             hrefs.append(a['href'])
+            # after listing all links, we remove the unnecessary links by storing only the links that has 'view' in
+            # it, considering that other url has no view
         job_links = [link for link in hrefs if 'view' in link]
 
     for url in job_links:
+        # loop through each job
         job_response = requests.get(url)
         if job_response:
             print("Parsing", url)
@@ -33,6 +37,7 @@ try:
                 description = job_soup.find('ul', {'class': 'description__job-criteria-list'})
                 desc_list = description.get_text().split('\n')
 
+                # Some posts do not have employment type or seniority level details, use if to modify the changes
                 if len(desc_list) > 14:
                     job_level = desc_list[6].strip()
                     employment_type = desc_list[14].strip()
@@ -43,12 +48,13 @@ try:
                     employment_type = desc_list[6].strip()
                     industry = 'Not Applicable'
 
-                print(
-                    f'Company : {company} ||Industry: {industry}||\n Job level: {job_level}||'
-                    f' Employment type: {employment_type}\n Location: {location}')
-                print()
-                print()
+                # print(
+                #     f'Company : {company} ||Industry: {industry}||\n Job level: {job_level}||'
+                #     f' Employment type: {employment_type}\n Location: {location}')
+                # print()
+                # print()
 
+                # extracting the main description
                 main_desc = job_soup.find('div', {'class': 'description__text description__text--rich'}).text.strip()
                 sentences = main_desc.split('.') if main_desc else None
 
@@ -57,6 +63,7 @@ try:
                     final_desc = '.'.join(sentences[:2])
 
                 else:
+                    # if the description is too short, get the first sentence and remove unnecessary characters
                     final_desc = sentences[0].replace('\n', '').replace('\n\n', '').replace('\n\n\n', '').replace(
                         'Show more', '').replace(
                         'Show less',
@@ -65,6 +72,7 @@ try:
                 final_desc += '.'
 
                 if position and location and company and job_level and employment_type:
+                    # store all data in dictionary
                     job_data = {
                         'title': position,
                         'company': company,
@@ -76,6 +84,7 @@ try:
                     }
                     jobs.append(job_data)
                     job_data = {}
+    # convert to json type data and store them in json file
     json_data = json.dumps(jobs)
     with open('job_listings.json', 'w') as file:
         file.write(json_data)
