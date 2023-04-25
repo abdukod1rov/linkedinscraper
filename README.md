@@ -20,7 +20,7 @@ To run the scraper, simply run the following command in your terminal:
 `python main.py`
 
 
-### The scraper will fetch the job listings from LinkedIn and save the data to a JSON file named job_listings.json.
+The scraper will fetch the job listings from LinkedIn and save the data to a JSON file named job_listings.json.
 
 
 ## Modifying the Scraper
