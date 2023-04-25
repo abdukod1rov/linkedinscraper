@@ -25,7 +25,9 @@ The scraper will fetch the job listings from LinkedIn and save the data to a JSO
 
 ## Modifying the Scraper
 There is already a valid Linkedin URL that fetches Python developer jobs. If you want to directly see the job_listing.json file, I provided that in the directory.
-And also, if you want to modify the scraper to extract additional data or use a different website, you can edit the main.py file. 
+And also, if you want to modify the scraper to extract additional data or use a different website, you can edit the main.py file and replace `base_url` with your url
+
+
 The file is well-commented and should be easy to follow.
 
 ## Conclusion
